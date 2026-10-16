@@ -1,141 +1,1688 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="hi" class="dark">
 <head>
   <meta charset="UTF-8">
-  <title>Voice-Ledger - Voice Test</title>
-  <style>
-    /* 1. वेलकम स्क्रीन की स्टाइल */
-    #welcome-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: #2563eb; /* नीला बैकग्राउंड */
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 32px;
-        z-index: 9999; /* यह सबसे ऊपर दिखेगा */
-        font-family: Arial, sans-serif;
-        transition: opacity 1s ease, visibility 1s; /* गायब होने का एनीमेशन */
-    }
-
-    /* गायब होने के बाद के लिए क्लास */
-    .fade-out {
-        opacity: 0;
-        visibility: hidden;
-    }
-    
-    /* 2. मुख्य पेज (Body) की स्टाइल */
-    body {
-        background-image: url("back.jpg");
-        background-repeat: no-repeat; /* repeat को नो-रिपीट किया ताकि इमेज फैले, बार-बार न दिखे */
-        background-size: cover;
-        background-position: center;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 100px;
-        background-color: #f4f6f8; /* इमेज न होने पर यह रंग दिखेगा */
-    }
-
-    /* 3. बटन और आउटपुट बॉक्स की स्टाइल */
-    .mic-btn {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 15px 30px; 
-      font-size: 30px;
-      border-radius: 50px;
-      cursor: pointer;
-    }
-    .mic-btn:hover {
-      background: #1d4ed8;
-    }
-    #output {
-      margin-top: 25px;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      min-height: 80px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      border: 1px solid #ddd;
-      font-size: 18px;
-    }
-    .status {
-      color: #666;
-      margin-top: 10px;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- वेलकम स्क्रीन को यहाँ <body> के ठीक नीचे होना चाहिए -->
-  <div id="welcome-screen">
-    <h1>Welcome to my website</h1>
-  </div>
-
-  <!-- आपका मुख्य कंटेंट -->
-  <h2> Voice test  by prince kumar</h2>
-  <button class="mic-btn" onclick="startVoice()">Mic On Karein 🎙️</button>
-  <div class="status" id="status">Button par click karein aur bole...</div>
-
-  <div id="output">Aap jo bolenge, yahan likha aayega...</div>
-
-  <!-- जावास्क्रिप्ट कोड (माइक और स्क्रीन हटाने दोनों के लिए) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduSphere AI - Futuristic Study Portal by Prince Kumar</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // वेलकम स्क्रीन को 3 सेकंड बाद हटाने के लिए
-    window.addEventListener('DOMContentLoaded', () => {
-        setTimeout(() => {
-            const welcome = document.getElementById('welcome-screen');
-            welcome.classList.add('fade-out');
-        }, 3000); 
-    });
-
-    // आपका पुराना वॉइस रिकग्निशन कोड
-    function startVoice() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      
-      if (!SpeechRecognition) {
-        alert("Aapka browser voice support nahi karta. Google Chrome use karein.");
-        return;
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cyberDark: '#070b19',
+            cardDark: 'rgba(15, 23, 42, 0.75)',
+            neonCyan: '#00f2fe',
+            neonViolet: '#a855f7',
+            neonEmerald: '#10b981'
+          },
+          fontFamily: {
+            sans: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['Fira Code', 'monospace']
+          }
+        }
       }
-
-      const recognition = new SpeechRecognition();
-      recognition.lang = 'en-IN';
-      
-      const statusText = document.getElementById('status');
-      const outputDiv = document.getElementById('output');
-
-      recognition.onstart = function() {
-        statusText.innerText = "Sun raha hoon... Boliye!";
-        statusText.style.color = "green";
-      };
-
-      recognition.onspeechend = function() {
-        statusText.innerText = "Aawaz process ho rahi hai...";
-        recognition.stop();
-      };
-
-      recognition.onresult = function(event) {
-        const spokenText = event.results[0][0].transcript;
-        outputDiv.innerText = spokenText;
-        statusText.innerText = "Complete! Agli aawaz ke liye dobara click karein.";
-        statusText.style.color = "#666";
-      };
-
-      recognition.onerror = function(event) {
-        statusText.innerText = "Error: " + event.error;
-        statusText.style.color = "red";
-      };
-
-      recognition.start();
     }
   </script>
 
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- jsPDF for direct client-side Book & Notes PDF downloads -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    body {
+      background-color: #070b19;
+      color: #f1f5f9;
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Glassmorphism Classes */
+    .glass-panel {
+      background: rgba(13, 20, 38, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card {
+      background: rgba(22, 33, 62, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 242, 254, 0.15);
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 242, 254, 0.4);
+      box-shadow: 0 10px 30px -10px rgba(0, 242, 254, 0.2);
+    }
+
+    /* Holographic Glows & Keyframes */
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 25px rgba(0, 242, 254, 0.4), inset 0 0 15px rgba(168, 85, 247, 0.4); }
+      50% { box-shadow: 0 0 50px rgba(0, 242, 254, 0.8), inset 0 0 25px rgba(168, 85, 247, 0.7); }
+    }
+    @keyframes orbitRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes reverseOrbit {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    @keyframes floatParticle {
+      0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+      50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+      100% { transform: translateY(0px) rotate(360deg); opacity: 0.8; }
+    }
+
+    .animate-orbit {
+      animation: orbitRotate 18s linear infinite;
+    }
+    .animate-orbit-reverse {
+      animation: reverseOrbit 12s linear infinite;
+    }
+    .orb-glow {
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(7, 11, 25, 0.8);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 242, 254, 0.25);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 242, 254, 0.6);
+    }
+
+    /* Visualizer Bar Animations */
+    .vis-bar {
+      transition: height 0.08s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-black">
+
+  <!-- Interactive Background Canvas (Glowing Math & Cyber Constellations) -->
+  <canvas id="bg-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+  <!-- =========================================================================
+       1. INTRO SPLASH & STUNNING 3-PHASE ANIMATION SCREEN
+       ========================================================================= -->
+  <div id="intro-splash" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 backdrop-blur-2xl transition-all duration-700">
+    <div class="relative max-w-xl w-full mx-4 text-center flex flex-col items-center">
+      
+      <!-- 3D Orbiting Hologram Core -->
+      <div class="relative w-44 h-44 mb-8 flex items-center justify-center">
+        <!-- Outer Gyro Ring 1 -->
+        <div class="absolute inset-0 rounded-full border-2 border-dashed border-cyan-400/40 animate-orbit"></div>
+        <!-- Middle Gyro Ring 2 -->
+        <div class="absolute inset-3 rounded-full border-2 border-dotted border-purple-400/50 animate-orbit-reverse"></div>
+        <!-- Floating Orbit Badges -->
+        <div class="absolute -top-3 w-8 h-8 rounded-full bg-cyan-500/30 border border-cyan-400 flex items-center justify-center text-cyan-300 text-xs shadow-lg shadow-cyan-500/50">
+          <i class="fa-solid fa-atom"></i>
+        </div>
+        <div class="absolute -bottom-3 w-8 h-8 rounded-full bg-purple-500/30 border border-purple-400 flex items-center justify-center text-purple-300 text-xs shadow-lg shadow-purple-500/50">
+          <i class="fa-solid fa-book-open"></i>
+        </div>
+        <div class="absolute -right-3 w-8 h-8 rounded-full bg-emerald-500/30 border border-emerald-400 flex items-center justify-center text-emerald-300 text-xs shadow-lg shadow-emerald-500/50">
+          <i class="fa-solid fa-code"></i>
+        </div>
+
+        <!-- Center Glowing Energy Core -->
+        <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-cyan-500 via-indigo-600 to-fuchsia-600 flex items-center justify-center orb-glow shadow-2xl">
+          <i class="fa-solid fa-graduation-cap text-white text-4xl transform hover:scale-110 transition duration-300"></i>
+        </div>
+      </div>
+
+      <!-- Animated Badges & Welcome Text -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-400/40 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-3">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        Next-Gen Education Engine 2.5
+      </div>
+      
+      <h1 class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-purple-400 tracking-tight mb-2">
+        EduSphere AI
+      </h1>
+      <p class="text-sm md:text-base text-slate-300 font-medium mb-1">
+        Smart Study & Academic Mentor by <span class="text-cyan-400 font-bold">Prince Kumar</span>
+      </p>
+      <p class="text-xs text-slate-400 max-w-md mx-auto mb-6">
+        Ask doubts in Hindi/English, download ready-made study notes & books in PDF, solve coding/math questions & test yourself with instant AI quizzes.
+      </p>
+
+      <!-- Dynamic Loading Feature Counters -->
+      <div class="grid grid-cols-3 gap-3 w-full max-w-md mb-8">
+        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
+          <div class="text-cyan-400 font-bold text-lg"><i class="fa-solid fa-bolt mr-1"></i>24/7</div>
+          <div class="text-[10px] text-slate-400">Doubt Solver</div>
+        </div>
+        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
+          <div class="text-purple-400 font-bold text-lg"><i class="fa-solid fa-file-pdf mr-1"></i>100+</div>
+          <div class="text-[10px] text-slate-400">PDF Generator</div>
+        </div>
+        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
+          <div class="text-emerald-400 font-bold text-lg"><i class="fa-solid fa-route mr-1"></i>Live</div>
+          <div class="text-[10px] text-slate-400">Roadmap Guide</div>
+        </div>
+      </div>
+
+      <!-- Action Button to Enter Immediately -->
+      <button onclick="dismissIntro()" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-sm tracking-wide shadow-xl shadow-cyan-500/25 transform hover:-translate-y-0.5 active:translate-y-0 transition flex items-center gap-2">
+        <span>Enter Study Portal / शुरू करें</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+
+      <span class="text-[10px] text-slate-500 mt-3 font-mono">Auto-launching in a moment...</span>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. TOP NAVIGATION BAR
+       ========================================================================= -->
+  <header class="relative z-20 w-full border-b border-slate-800/80 glass-panel px-4 md:px-8 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand Logo & Title -->
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('doubt')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/25">
+          <i class="fa-solid fa-graduation-cap text-lg"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base md:text-lg font-black tracking-tight text-white">EduSphere <span class="text-cyan-400">AI</span></h1>
+            <span class="text-[9px] uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">Vidya 2.5</span>
+          </div>
+          <p class="text-[11px] text-slate-400">AI Mentor by <span class="text-cyan-300 font-medium">Prince Kumar</span></p>
+        </div>
+      </div>
+
+      <!-- Quick Subject Category Pills -->
+      <div class="hidden lg:flex items-center space-x-2 text-xs">
+        <button onclick="setTopicPrompt('B.Tech CSE: Data Structures, Algorithms and Operating Systems')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 hover:bg-cyan-950/60 border border-slate-700/60 hover:border-cyan-400/50 text-slate-300 hover:text-cyan-300 transition">
+          <i class="fa-solid fa-laptop-code text-cyan-400 mr-1.5"></i>B.Tech / CSE
+        </button>
+        <button onclick="setTopicPrompt('Class 11-12 Physics, Chemistry and Mathematics (PCM JEE Preparation)')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 hover:bg-cyan-950/60 border border-slate-700/60 hover:border-cyan-400/50 text-slate-300 hover:text-cyan-300 transition">
+          <i class="fa-solid fa-square-root-variable text-purple-400 mr-1.5"></i>Class 11-12 PCM
+        </button>
+        <button onclick="setTopicPrompt('Web Development: HTML, CSS, JavaScript, React, Node.js roadmap and concepts')" class="px-3 py-1.5 rounded-lg bg-slate-800/60 hover:bg-cyan-950/60 border border-slate-700/60 hover:border-cyan-400/50 text-slate-300 hover:text-cyan-300 transition">
+          <i class="fa-brands fa-react text-blue-400 mr-1.5"></i>Web Dev & Coding
+        </button>
+      </div>
+
+      <!-- Controls: Language, TTS Sound, & Voice Mode Indicator -->
+      <div class="flex items-center space-x-2">
+        <select id="lang-select" onchange="onLanguageChange()" class="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-cyan-400 cursor-pointer">
+          <option value="hi-IN" selected>🇮🇳 Hinglish / हिन्दी</option>
+          <option value="en-IN">🇮🇳 Indian English</option>
+          <option value="en-US">🌐 Global English</option>
+        </select>
+
+        <button id="tts-toggle-btn" onclick="toggleMute()" title="Mute/Unmute AI Voice" class="p-2 rounded-lg bg-slate-900/90 border border-slate-700 text-slate-300 hover:text-cyan-400 transition">
+          <i id="tts-icon" class="fa-solid fa-volume-high text-sm"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-7xl mx-auto mt-3 flex items-center gap-2 overflow-x-auto pb-1 text-xs md:text-sm font-medium">
+      <button id="tab-btn-doubt" onclick="switchTab('doubt')" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold shrink-0 transition">
+        <i class="fa-solid fa-robot"></i>
+        <span>AI Doubt Tutor & Voice</span>
+      </button>
+
+      <button id="tab-btn-library" onclick="switchTab('library')" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800 shrink-0 transition">
+        <i class="fa-solid fa-book-bookmark text-purple-400"></i>
+        <span>Books & Notes PDF Vault</span>
+      </button>
+
+      <button id="tab-btn-roadmap" onclick="switchTab('roadmap')" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800 shrink-0 transition">
+        <i class="fa-solid fa-route text-emerald-400"></i>
+        <span>Career & Roadmaps</span>
+      </button>
+
+      <button id="tab-btn-quiz" onclick="switchTab('quiz')" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800 shrink-0 transition">
+        <i class="fa-solid fa-circle-question text-amber-400"></i>
+        <span>AI Quiz & Practice</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       3. MAIN CONTENT AREA (DYNAMIC TAB VIEWS)
+       ========================================================================= -->
+  <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto p-3 md:p-6">
+
+    <!-- =======================================================================
+         VIEW 1: AI DOUBT SOLVER & VOICE TUTOR
+         ======================================================================= -->
+    <div id="view-doubt" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      
+      <!-- Left Column: Visual AI Holographic Avatar & Voice Controller -->
+      <div class="lg:col-span-5 glass-panel rounded-2xl p-6 border border-slate-800 flex flex-col justify-between items-center relative overflow-hidden shadow-2xl">
+        
+        <!-- Background Ambient Glow -->
+        <div class="absolute -top-12 -left-12 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-12 -right-12 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Top status bar -->
+        <div class="w-full flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-3">
+          <span class="flex items-center gap-2">
+            <span id="agent-pulse-dot" class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+            <span id="agent-state-label" class="font-semibold text-slate-200">EduSphere AI: Active</span>
+          </span>
+          <span class="font-mono text-[11px] text-cyan-400 bg-cyan-950/60 border border-cyan-800/60 px-2 py-0.5 rounded">
+            Subject: All STEM & Code
+          </span>
+        </div>
+
+        <!-- Holographic 3D Interactive Avatar Core -->
+        <div class="my-6 relative flex items-center justify-center cursor-pointer" onclick="toggleVoiceSession()" title="Click to speak with EduSphere">
+          <!-- Ambient Rings -->
+          <div class="absolute w-44 h-44 rounded-full border border-cyan-500/30 animate-orbit"></div>
+          <div class="absolute w-56 h-56 rounded-full border border-purple-500/20 animate-orbit-reverse"></div>
+          
+          <!-- Core Interactive Sphere -->
+          <div id="ai-voice-orb" class="w-36 h-36 rounded-full bg-gradient-to-tr from-cyan-600 via-indigo-600 to-purple-600 flex flex-col items-center justify-center orb-glow shadow-2xl transition-all duration-300">
+            <i id="orb-icon" class="fa-solid fa-graduation-cap text-4xl text-white drop-shadow-md"></i>
+            <span id="orb-text" class="text-[10px] tracking-wider uppercase font-bold text-cyan-200 mt-2">TAP TO SPEAK</span>
+          </div>
+        </div>
+
+        <!-- Realtime Audio Visualizer Simulation -->
+        <div id="audio-vis-container" class="flex items-end justify-center gap-1.5 h-10 w-full mb-3 opacity-40">
+          <div class="vis-bar w-1.5 bg-cyan-400 rounded-full h-2"></div>
+          <div class="vis-bar w-1.5 bg-cyan-400 rounded-full h-4"></div>
+          <div class="vis-bar w-1.5 bg-indigo-400 rounded-full h-7"></div>
+          <div class="vis-bar w-1.5 bg-indigo-400 rounded-full h-3"></div>
+          <div class="vis-bar w-1.5 bg-purple-400 rounded-full h-8"></div>
+          <div class="vis-bar w-1.5 bg-purple-400 rounded-full h-5"></div>
+          <div class="vis-bar w-1.5 bg-cyan-400 rounded-full h-2"></div>
+          <div class="vis-bar w-1.5 bg-cyan-400 rounded-full h-6"></div>
+          <div class="vis-bar w-1.5 bg-indigo-400 rounded-full h-3"></div>
+        </div>
+
+        <!-- Interactive Voice Status Prompt -->
+        <p id="voice-status-msg" class="text-xs md:text-sm text-center text-slate-300 min-h-[38px] flex items-center justify-center px-4">
+          Boliye: "What is Bubble Sort?" ya "12th Physics formulas samjhao"
+        </p>
+
+        <!-- Primary Voice Activation Button -->
+        <div class="w-full mt-4 space-y-2">
+          <button id="mic-toggle-btn" onclick="toggleVoiceSession()" class="w-full py-3.5 px-6 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-3 transition-all duration-300 bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white shadow-lg shadow-cyan-500/25 active:scale-98">
+            <i id="mic-btn-icon" class="fa-solid fa-microphone text-lg"></i>
+            <span id="mic-btn-text">Mic On Karein 🎙️ (Voice Ask)</span>
+          </button>
+        </div>
+
+        <!-- Quick Subject Guidance Prompts -->
+        <div class="w-full mt-5 pt-4 border-t border-slate-800 text-center">
+          <div class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-2">Instant Doubt Starters:</div>
+          <div class="flex flex-wrap gap-1.5 justify-center">
+            <button onclick="handleQuickDoubt('Explain Time Complexity & Big-O notation with simple Hindi examples')" class="text-[11px] bg-slate-900/80 hover:bg-cyan-950 border border-slate-700 hover:border-cyan-400 text-slate-300 px-2.5 py-1 rounded-full transition">
+              ⚡ Big-O Notation
+            </button>
+            <button onclick="handleQuickDoubt('Explain Newton 3 Laws of Motion with real life examples in Hinglish')" class="text-[11px] bg-slate-900/80 hover:bg-cyan-950 border border-slate-700 hover:border-cyan-400 text-slate-300 px-2.5 py-1 rounded-full transition">
+              🔬 Newton's 3 Laws
+            </button>
+            <button onclick="handleQuickDoubt('Give me a simple C++ program for Binary Search with step-by-step logic')" class="text-[11px] bg-slate-900/80 hover:bg-cyan-950 border border-slate-700 hover:border-cyan-400 text-slate-300 px-2.5 py-1 rounded-full transition">
+              💻 Binary Search in C++
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Interactive Chat & Step-by-Step Educational Solution Ledger -->
+      <div class="lg:col-span-7 glass-panel rounded-2xl border border-slate-800 flex flex-col h-[650px] shadow-2xl overflow-hidden">
+        
+        <!-- Chat Header -->
+        <div class="px-5 py-3.5 border-b border-slate-800 bg-slate-900/60 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-terminal text-cyan-400 text-sm"></i>
+            <h2 class="text-sm font-bold text-white">Academic Doubt Ledger & Code Workspace</h2>
+          </div>
+          <button onclick="clearChatLedger()" class="text-xs text-slate-400 hover:text-rose-400 transition" title="Clear doubts chat">
+            <i class="fa-solid fa-trash-can mr-1"></i>Clear
+          </button>
+        </div>
+
+        <!-- Live Voice Transcript Indicator -->
+        <div id="live-speech-banner" class="px-4 py-2 bg-indigo-950/40 border-b border-indigo-900/50 flex items-center gap-2 text-xs text-cyan-200">
+          <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[10px] font-bold uppercase shrink-0">Speech Live</span>
+          <span id="speech-live-text" class="italic truncate text-slate-300">Tap mic and speak your doubt...</span>
+        </div>
+
+        <!-- Chat Stream Messages Container -->
+        <div id="chat-messages" class="flex-1 p-4 md:p-5 overflow-y-auto space-y-4">
+          <!-- Initial Assistant Message -->
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white shrink-0 shadow-md">
+              <i class="fa-solid fa-robot text-xs"></i>
+            </div>
+            <div class="max-w-[88%] bg-slate-900/80 border border-slate-800 rounded-2xl rounded-tl-sm p-4 text-slate-200 text-sm space-y-2">
+              <div class="flex items-center justify-between text-xs font-bold text-cyan-300">
+                <span>EduSphere AI Mentor</span>
+                <span class="text-[10px] text-slate-500 font-mono">Ready</span>
+              </div>
+              <p class="leading-relaxed">
+                Namaste! Main hoon aapka personal Study & Educational Mentor (By Prince Kumar). 📚<br>
+                Aap mujhse:
+              </p>
+              <ul class="list-disc list-inside text-xs text-slate-300 space-y-1">
+                <li>Math, Physics, Chemistry ke tough formulas ya questions poochh sakte hain.</li>
+                <li>C, C++, Python, Java, Web Dev ke programs & bug fixes samajh sakte hain.</li>
+                <li>Exam tips, notes ya roadmap discuss kar sakte hain.</li>
+              </ul>
+              <div class="pt-2">
+                <span class="text-xs text-indigo-400">Mic on karke boliye ya neeche question type kijiye!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Form Input -->
+        <div class="p-3.5 border-t border-slate-800 bg-slate-900/70">
+          <form id="doubt-form" onsubmit="handleDoubtSubmit(event)" class="flex items-center gap-2">
+            <input 
+              type="text" 
+              id="doubt-input" 
+              placeholder="Type your question or doubt here (e.g. Solve quadratic equation, Explain DFS)..."
+              class="flex-1 bg-slate-950 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition"
+            >
+            <button 
+              type="submit" 
+              class="p-3 bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white rounded-xl transition duration-200 flex items-center justify-center w-12 h-11 shadow-lg shadow-cyan-500/20 shrink-0"
+            >
+              <i class="fa-solid fa-paper-plane text-sm"></i>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         VIEW 2: BOOKS & NOTES PDF VAULT ("Pustak & Notes Generator")
+         ======================================================================= -->
+    <div id="view-library" class="hidden space-y-6">
+      
+      <!-- Generator Hero Card -->
+      <div class="glass-panel p-6 rounded-2xl border border-slate-800 relative overflow-hidden">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-300 text-xs font-semibold uppercase tracking-wider mb-3">
+            <i class="fa-solid fa-file-pdf text-purple-400"></i> AI PDF Book & Notes Compiler
+          </div>
+          <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-2">Pustak & Notes Vault</h2>
+          <p class="text-sm text-slate-300 mb-5 leading-relaxed">
+            Aapko jis subject ya topic ki book ya summary notes chahiye, uska naam likhiye. AI automatically formatted chapter-wise notes banayega aur aap instantly ek professional PDF document download kar sakte hain!
+          </p>
+
+          <!-- PDF Search / Generator Input -->
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input 
+              type="text" 
+              id="book-topic-input" 
+              placeholder="E.g., Complete C Programming Handbook, Class 12 Physics Electromagnetism, DSA Cheat Sheet"
+              class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-400"
+            >
+            <button 
+              onclick="generateCustomBookPDF()" 
+              id="generate-pdf-btn"
+              class="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-purple-600/30 shrink-0 transition"
+            >
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>Compile & Download PDF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curated Instant PDF Books Shelf -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-bookmark text-cyan-400"></i>
+            Curated Study Guides & Handbooks (Instant Download)
+          </h3>
+          <span class="text-xs text-slate-400">100% Free Educational Material</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="curated-books-container">
+          <!-- Curated Book Card 1 -->
+          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl mb-4">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <span class="text-[10px] uppercase font-bold tracking-wider text-cyan-400">Computer Science</span>
+              <h4 class="text-base font-bold text-white mt-1 mb-2">C Programming & Data Structures Handbook</h4>
+              <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+                Pointers, Memory Allocation, Linked Lists, Stacks, Queues, Binary Trees & complexity cheatsheets.
+              </p>
+            </div>
+            <button onclick="downloadCuratedBook('c_dsa')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-cyan-950 border border-slate-700 hover:border-cyan-400 text-cyan-300 font-semibold text-xs flex items-center justify-center gap-2 transition">
+              <i class="fa-solid fa-download"></i> Download Complete PDF
+            </button>
+          </div>
+
+          <!-- Curated Book Card 2 -->
+          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl mb-4">
+                <i class="fa-solid fa-atom"></i>
+              </div>
+              <span class="text-[10px] uppercase font-bold tracking-wider text-purple-400">Class 11 & 12 Science</span>
+              <h4 class="text-base font-bold text-white mt-1 mb-2">Physics Ultimate Formula Book (JEE / NEET)</h4>
+              <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+                Kinematics, Thermodynamics, Electrostatics, Magnetism, Optics & Modern Physics quick revision formulas.
+              </p>
+            </div>
+            <button onclick="downloadCuratedBook('physics_formulas')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-purple-950 border border-slate-700 hover:border-purple-400 text-purple-300 font-semibold text-xs flex items-center justify-center gap-2 transition">
+              <i class="fa-solid fa-download"></i> Download Complete PDF
+            </button>
+          </div>
+
+          <!-- Curated Book Card 3 -->
+          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                <i class="fa-brands fa-html5"></i>
+              </div>
+              <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-400">Web Engineering</span>
+              <h4 class="text-base font-bold text-white mt-1 mb-2">Full-Stack Web Dev Blueprint</h4>
+              <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+                HTML5 semantic architecture, CSS Flexbox/Grid, JavaScript ES6+, DOM manipulation & REST API design.
+              </p>
+            </div>
+            <button onclick="downloadCuratedBook('web_blueprint')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-emerald-950 border border-slate-700 hover:border-emerald-400 text-emerald-300 font-semibold text-xs flex items-center justify-center gap-2 transition">
+              <i class="fa-solid fa-download"></i> Download Complete PDF
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Generated PDF Preview Modal / Notification Box -->
+      <div id="pdf-status-banner" class="hidden p-4 rounded-xl bg-cyan-950/60 border border-cyan-400/40 text-cyan-200 text-xs flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-spinner fa-spin text-base text-cyan-400"></i>
+          <span id="pdf-status-text">Compiling high quality educational PDF book...</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         VIEW 3: ACADEMIC & CAREER ROADMAP NAVIGATOR
+         ======================================================================= -->
+    <div id="view-roadmap" class="hidden space-y-6">
+      
+      <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-black text-white">Interactive Academic Roadmap Navigator</h2>
+            <p class="text-xs text-slate-400">Step-by-step milestones to crack exams, master tech stacks & prepare for placements.</p>
+          </div>
+
+          <!-- Roadmap Selector -->
+          <div class="flex flex-wrap gap-2">
+            <button onclick="loadRoadmap('btech_cse')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 transition">
+              🎓 B.Tech CSE (Year 1 to 4)
+            </button>
+            <button onclick="loadRoadmap('mern')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white border border-slate-700 transition">
+              💻 Modern Full-Stack Dev
+            </button>
+            <button onclick="loadRoadmap('dsa_leetcode')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white border border-slate-700 transition">
+              ⚡ DSA & Placement Master
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Roadmap Milestones Container -->
+        <div id="roadmap-container" class="relative pl-6 md:pl-8 border-l-2 border-cyan-500/30 space-y-8 my-6">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Custom Roadmap Generator with Gemini -->
+        <div class="mt-8 pt-6 border-t border-slate-800">
+          <h4 class="text-sm font-bold text-white mb-2">Want a custom roadmap for your exact goal?</h4>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input 
+              type="text" 
+              id="custom-roadmap-goal" 
+              placeholder="e.g. 6 Months Plan for AI Engineer, GATE CSE Preparation, BCA to Software Engineer"
+              class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+            >
+            <button 
+              onclick="generateAIRoadmap()" 
+              class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center justify-center gap-2 transition"
+            >
+              <i class="fa-solid fa-compass"></i> Generate Roadmap
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         VIEW 4: AI PRACTICE QUIZ & INSTANT TEST MODE
+         ======================================================================= -->
+    <div id="view-quiz" class="hidden space-y-6">
+      <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-black text-white">AI Instant Exam & Quiz Practice</h2>
+            <p class="text-xs text-slate-400">Test your knowledge with real-time AI-generated questions and detailed score evaluation.</p>
+          </div>
+          
+          <div class="flex items-center gap-2">
+            <input 
+              type="text" 
+              id="quiz-topic-input" 
+              placeholder="Enter topic: C++, Physics, SQL, OS..." 
+              class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-400"
+            >
+            <button 
+              onclick="startAIQuiz()" 
+              id="quiz-start-btn"
+              class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-amber-500/20"
+            >
+              <i class="fa-solid fa-play"></i> Generate Quiz
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-area" class="min-h-[300px] flex flex-col justify-center items-center text-center p-6 bg-slate-950/60 rounded-xl border border-slate-800">
+          <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl mb-3">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-1">Ready to test your concepts?</h3>
+          <p class="text-xs text-slate-400 max-w-sm mb-4">Upar kisi bhi subject ka naam daalkar 'Generate Quiz' button dabaiye ya neeche diye gaye demo quiz ko start kijiye.</p>
+          <div class="flex gap-2">
+            <button onclick="setQuizTopicAndStart('C Programming Basics')" class="text-xs px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-700">C Language Quiz</button>
+            <button onclick="setQuizTopicAndStart('Data Structures & Algorithms')" class="text-xs px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-slate-700">DSA Quiz</button>
+            <button onclick="setQuizTopicAndStart('General Science & Physics')" class="text-xs px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-purple-300 border border-slate-700">Physics Quiz</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       4. MODERN FOOTER
+       ========================================================================= -->
+  <footer class="relative z-10 w-full border-t border-slate-800/80 glass-panel py-3.5 px-4 md:px-8 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+        <span><strong class="text-slate-200">EduSphere AI</strong> — Dedicated Study Mentor for Indian Students</span>
+      </div>
+      <div>
+        Designed & Developed with ❤️ by <span class="text-cyan-400 font-bold">Prince Kumar</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900 border border-cyan-500/40 shadow-2xl text-xs md:text-sm text-slate-100">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-cyan-400 text-base"></i>
+    <span id="toast-msg">Notification Message</span>
+  </div>
+
+  <!-- =========================================================================
+       5. JAVASCRIPT: GEMINI 2.5 INTEGRATION, SPEECH, PDF & INTERACTION ENGINE
+       ========================================================================= -->
+  <script>
+    /* =======================================================================
+       GLOBAL STATE VARIABLES
+       ======================================================================= */
+    let isListening = false;
+    let isThinking = false;
+    let isSpeaking = false;
+    let isMuted = false;
+    let currentLang = 'hi-IN';
+    let recognition = null;
+    let chatLedger = [];
+    let audioVisInterval = null;
+    let currentTab = 'doubt';
+    let currentQuizQuestions = [];
+    let currentQuestionIndex = 0;
+    let quizScore = 0;
+
+    // Elements
+    const chatMessages = document.getElementById('chat-messages');
+    const doubtInput = document.getElementById('doubt-input');
+    const speechLiveText = document.getElementById('speech-live-text');
+    const voiceStatusMsg = document.getElementById('voice-status-msg');
+    const micToggleBtn = document.getElementById('mic-toggle-btn');
+    const micBtnIcon = document.getElementById('mic-btn-icon');
+    const micBtnText = document.getElementById('mic-btn-text');
+    const aiVoiceOrb = document.getElementById('ai-voice-orb');
+    const orbIcon = document.getElementById('orb-icon');
+    const orbText = document.getElementById('orb-text');
+    const agentPulseDot = document.getElementById('agent-pulse-dot');
+    const agentStateLabel = document.getElementById('agent-state-label');
+    const visBars = document.querySelectorAll('.vis-bar');
+    const ttsToggleBtn = document.getElementById('tts-toggle-btn');
+    const ttsIcon = document.getElementById('tts-icon');
+
+    /* =======================================================================
+       1. INITIALIZATION & SPLASH CONTROLS
+       ======================================================================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      // Auto dismiss splash after 3.8s or user button
+      setTimeout(() => {
+        dismissIntro();
+      }, 3800);
+
+      initSpeechRecognition();
+      initBackgroundConstellations();
+      loadRoadmap('btech_cse');
+    });
+
+    function dismissIntro() {
+      const splash = document.getElementById('intro-splash');
+      if (splash && !splash.classList.contains('opacity-0')) {
+        splash.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => splash.remove(), 700);
+        showToast("Welcome to EduSphere AI by Prince Kumar! Ready to study.", "fa-solid fa-graduation-cap");
+      }
+    }
+
+    /* =======================================================================
+       2. TAB SWITCHING
+       ======================================================================= */
+    function switchTab(tabId) {
+      currentTab = tabId;
+      const views = ['doubt', 'library', 'roadmap', 'quiz'];
+      
+      views.forEach(v => {
+        const viewElem = document.getElementById(`view-${v}`);
+        const tabBtn = document.getElementById(`tab-btn-${v}`);
+        
+        if (v === tabId) {
+          viewElem.classList.remove('hidden');
+          tabBtn.className = "tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold shrink-0 transition";
+        } else {
+          viewElem.classList.add('hidden');
+          tabBtn.className = "tab-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800 shrink-0 transition";
+        }
+      });
+    }
+
+    function setTopicPrompt(topic) {
+      switchTab('doubt');
+      doubtInput.value = `Mujhe ${topic} ke baare me detail me samjhaiye, exam me acche marks kaise laye?`;
+      doubtInput.focus();
+    }
+
+    /* =======================================================================
+       3. SPEECH RECOGNITION (WEB SPEECH API)
+       ======================================================================= */
+    function initSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        voiceStatusMsg.innerText = "Browser voice recognition not supported. You can type freely!";
+        micToggleBtn.disabled = true;
+        micToggleBtn.classList.add('opacity-50');
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = true;
+      recognition.lang = currentLang;
+
+      recognition.onstart = function() {
+        isListening = true;
+        setAgentState('listening');
+        voiceStatusMsg.innerHTML = "<span class='text-cyan-400 font-bold'>Sun raha hoon... Boliye apna question! (Listening...)</span>";
+        speechLiveText.innerText = "Aapki aawaz record ho rahi hai...";
+        micToggleBtn.className = "w-full py-3.5 px-6 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-3 transition-all duration-300 bg-rose-600 text-white shadow-lg shadow-rose-600/30 animate-pulse";
+        micBtnIcon.className = "fa-solid fa-microphone-lines text-lg";
+        micBtnText.innerText = "Listening... (Rukne ke liye click)";
+        startAudioVisualizer(true);
+      };
+
+      recognition.onresult = function(event) {
+        let interim = '';
+        let final = '';
+
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          if (event.results[i].isFinal) {
+            final += event.results[i][0].transcript;
+          } else {
+            interim += event.results[i][0].transcript;
+          }
+        }
+
+        const currentText = final || interim;
+        if (currentText) {
+          speechLiveText.innerText = `"${currentText}"`;
+        }
+
+        if (final.trim().length > 0) {
+          processEducationalQuery(final.trim());
+        }
+      };
+
+      recognition.onspeechend = function() {
+        voiceStatusMsg.innerText = "Question process ho raha hai...";
+        recognition.stop();
+      };
+
+      recognition.onerror = function(event) {
+        console.warn("Speech recognition error:", event.error);
+        isListening = false;
+        startAudioVisualizer(false);
+        resetMicButton();
+        setAgentState('idle');
+
+        if (event.error === 'not-allowed') {
+          showToast("Microphone permission denied. Browser me mic allow karein.", "fa-solid fa-ban");
+          voiceStatusMsg.innerHTML = "<span class='text-rose-400'>Microphone blocked. Setting me jakar allow karein.</span>";
+        } else if (event.error === 'no-speech') {
+          voiceStatusMsg.innerText = "Kuch sunai nahi diya. Dobara mic dabakar boliye.";
+        }
+      };
+
+      recognition.onend = function() {
+        isListening = false;
+        resetMicButton();
+        if (!isThinking && !isSpeaking) {
+          setAgentState('idle');
+        }
+      };
+    }
+
+    function toggleVoiceSession() {
+      if (window.speechSynthesis && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+      }
+
+      if (!recognition) {
+        initSpeechRecognition();
+        if (!recognition) return;
+      }
+
+      if (isListening) {
+        recognition.stop();
+        isListening = false;
+        resetMicButton();
+        setAgentState('idle');
+      } else {
+        try {
+          recognition.lang = currentLang;
+          recognition.start();
+        } catch (e) {
+          recognition.stop();
+          setTimeout(() => {
+            try { recognition.start(); } catch(err){}
+          }, 200);
+        }
+      }
+    }
+
+    function resetMicButton() {
+      micToggleBtn.className = "w-full py-3.5 px-6 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-3 transition-all duration-300 bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white shadow-lg shadow-cyan-500/25 active:scale-98";
+      micBtnIcon.className = "fa-solid fa-microphone text-lg";
+      micBtnText.innerText = "Mic On Karein 🎙️ (Voice Ask)";
+    }
+
+    /* =======================================================================
+       4. GEMINI 2.5 FLASH API INTEGRATION (DOUBT & EDUCATION)
+       ======================================================================= */
+    async function processEducationalQuery(queryText) {
+      if (!queryText || queryText.trim().length === 0) return;
+
+      appendChatMessage('user', queryText);
+      doubtInput.value = '';
+
+      isThinking = true;
+      setAgentState('thinking');
+      voiceStatusMsg.innerHTML = "<span class='text-purple-300 font-bold'>EduSphere AI solution prepare kar raha hai...</span>";
+      speechLiveText.innerText = `Aapka sawal: "${queryText}"`;
+
+      try {
+        const solution = await callGeminiEducationalAPI(queryText);
+        isThinking = false;
+        appendChatMessage('assistant', solution);
+        voiceStatusMsg.innerHTML = "<span class='text-emerald-400 font-semibold'>Jawab taiyaar hai! Agle question ke liye Mic dabayein.</span>";
+        speakText(solution);
+      } catch (err) {
+        console.error("AI API Error:", err);
+        isThinking = false;
+        setAgentState('idle');
+        const fallback = "Kshama karein, connection issue aa gaya. Lekin aap dobara try kar sakte hain ya question ko thoda aur clearly poochh sakte hain.";
+        appendChatMessage('assistant', fallback);
+        voiceStatusMsg.innerText = "Kripya dobara try karein.";
+      }
+    }
+
+    async function callGeminiEducationalAPI(prompt) {
+      const apiKey = window.__CANVAS_API_KEY__ || "";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+      const systemInstruction = 
+        "You are EduSphere AI (Vidya AI), an empathetic, world-class educational mentor & teacher built by Prince Kumar. " +
+        "Your students are school students (Class 9-12, CBSE/ICSE/State), engineering & B.Tech college students, and coders in India. " +
+        "Language & Tone: Explain concepts with utmost clarity in fluent natural Hinglish (Hindi + English mix) or pure English as chosen by user. " +
+        "Style: Give step-by-step solutions, provide well-commented code snippets (C, C++, Python, JavaScript etc.) when asked for programming, breakdown math formulas step-by-step, and give real-world analogies. " +
+        "Always be encouraging, precise, and supportive.";
+
+      const historyFormatted = chatLedger.slice(-4).map(item => ({
+        role: item.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: item.text }]
+      }));
+
+      historyFormatted.push({
+        role: 'user',
+        parts: [{ text: prompt }]
+      });
+
+      const payload = {
+        contents: historyFormatted,
+        systemInstruction: {
+          parts: [{ text: systemInstruction }]
+        }
+      };
+
+      let retries = 3;
+      let delay = 1000;
+      let result = null;
+
+      while (retries > 0) {
+        try {
+          const res = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) throw new Error("API status " + res.status);
+          result = await res.json();
+          break;
+        } catch (e) {
+          retries--;
+          if (retries === 0) throw e;
+          await new Promise(r => setTimeout(r, delay));
+          delay *= 2;
+        }
+      }
+
+      const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) throw new Error("No answer received from Gemini");
+      return text;
+    }
+
+    /* =======================================================================
+       5. SPEECH SYNTHESIS (TTS)
+       ======================================================================= */
+    function speakText(rawText) {
+      if (isMuted || !('speechSynthesis' in window)) {
+        setAgentState('idle');
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      // Clean markdown code blocks and asterisks for smooth pleasant voice speech
+      let cleanSpeech = rawText.replace(/```[\s\S]*?```/g, 'Code snippet provided in chat.');
+      cleanSpeech = cleanSpeech.replace(/[*#_`]/g, '').slice(0, 350); // speak the most essential answer summary
+
+      const utterance = new SpeechSynthesisUtterance(cleanSpeech);
+      utterance.lang = currentLang;
+      utterance.rate = 1.05;
+      utterance.pitch = 1.0;
+
+      const voices = window.speechSynthesis.getVoices();
+      let matchedVoice = null;
+
+      if (currentLang.startsWith('hi')) {
+        matchedVoice = voices.find(v => v.lang.includes('hi')) || voices.find(v => v.name.includes('Hindi'));
+      } else {
+        matchedVoice = voices.find(v => v.lang === 'en-IN') || voices.find(v => v.lang.startsWith('en'));
+      }
+
+      if (matchedVoice) utterance.voice = matchedVoice;
+
+      utterance.onstart = function() {
+        isSpeaking = true;
+        setAgentState('speaking');
+        startAudioVisualizer(true);
+        voiceStatusMsg.innerHTML = "<span class='text-emerald-300 font-semibold'>EduSphere bol raha hai... (Speaking solution)</span>";
+      };
+
+      utterance.onend = function() {
+        isSpeaking = false;
+        startAudioVisualizer(false);
+        setAgentState('idle');
+        voiceStatusMsg.innerText = "Button par click karke agla sawal bole...";
+      };
+
+      utterance.onerror = function() {
+        isSpeaking = false;
+        startAudioVisualizer(false);
+        setAgentState('idle');
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    /* =======================================================================
+       6. AGENT STATE VISUALIZATIONS
+       ======================================================================= */
+    function setAgentState(state) {
+      if (state === 'listening') {
+        orbIcon.className = "fa-solid fa-microphone-lines text-4xl text-rose-300 animate-pulse";
+        orbText.innerText = "LISTENING";
+        agentPulseDot.className = "w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping";
+        agentStateLabel.innerText = "EduSphere: Listening...";
+      } else if (state === 'thinking') {
+        orbIcon.className = "fa-solid fa-atom text-4xl text-purple-300 animate-spin";
+        orbText.innerText = "SOLVING";
+        agentPulseDot.className = "w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse";
+        agentStateLabel.innerText = "EduSphere: Computing Solution...";
+      } else if (state === 'speaking') {
+        orbIcon.className = "fa-solid fa-volume-high text-4xl text-emerald-300";
+        orbText.innerText = "EXPLAINING";
+        agentPulseDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse";
+        agentStateLabel.innerText = "EduSphere: Speaking Explanation";
+      } else {
+        orbIcon.className = "fa-solid fa-graduation-cap text-4xl text-white";
+        orbText.innerText = "TAP TO SPEAK";
+        agentPulseDot.className = "w-2.5 h-2.5 rounded-full bg-cyan-400";
+        agentStateLabel.innerText = "EduSphere AI: Active";
+      }
+    }
+
+    function appendChatMessage(role, text) {
+      const isUser = role === 'user';
+      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      // Formatted text rendering (converts markdown code blocks to styled boxes)
+      const formattedHTML = formatEducationalMarkdown(text);
+
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `flex items-start gap-3 ${isUser ? 'flex-row-reverse' : ''}`;
+
+      msgDiv.innerHTML = `
+        <div class="w-8 h-8 rounded-full ${isUser ? 'bg-gradient-to-tr from-cyan-500 to-blue-600' : 'bg-gradient-to-tr from-purple-500 to-indigo-600'} flex items-center justify-center text-white shrink-0 shadow-sm mt-0.5">
+          <i class="fa-solid ${isUser ? 'fa-user' : 'fa-robot'} text-xs"></i>
+        </div>
+        <div class="max-w-[88%] ${isUser ? 'bg-cyan-950/80 text-white rounded-tr-sm border-cyan-500/40' : 'bg-slate-900/90 text-slate-200 rounded-tl-sm border-slate-800'} border rounded-2xl p-4 shadow-md space-y-2 text-sm leading-relaxed">
+          <div class="flex items-center justify-between text-xs pb-1 border-b border-slate-800/60 font-semibold ${isUser ? 'text-cyan-300' : 'text-purple-300'}">
+            <span>${isUser ? 'You (Student)' : 'EduSphere AI Solution'}</span>
+            <span class="text-[10px] text-slate-500 font-mono">${time}</span>
+          </div>
+          <div>${formattedHTML}</div>
+        </div>
+      `;
+
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      chatLedger.push({ role, text });
+    }
+
+    function formatEducationalMarkdown(raw) {
+      if (!raw) return '';
+      // Escape generic HTML
+      let escaped = raw
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+      // Replace ```code``` blocks
+      escaped = escaped.replace(/```([a-zA-Z]*)\n([\s\S]*?)```/g, function(match, lang, code) {
+        return `<div class="my-3 rounded-xl bg-slate-950 border border-slate-800 p-3 font-mono text-xs text-cyan-300 overflow-x-auto"><div class="text-[10px] uppercase text-slate-500 mb-1 font-bold">${lang || 'Code'}</div><pre><code>${code.trim()}</code></pre></div>`;
+      });
+
+      // Replace inline `code`
+      escaped = escaped.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-800 text-cyan-300 font-mono text-xs">$1</code>');
+
+      // Replace bold **text**
+      escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
+
+      // Line breaks
+      escaped = escaped.replace(/\n/g, '<br>');
+
+      return escaped;
+    }
+
+    function handleDoubtSubmit(e) {
+      e.preventDefault();
+      const val = doubtInput.value.trim();
+      if (!val) return;
+      processEducationalQuery(val);
+    }
+
+    function handleQuickDoubt(text) {
+      doubtInput.value = text;
+      processEducationalQuery(text);
+    }
+
+    function clearChatLedger() {
+      chatMessages.innerHTML = `
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white shrink-0 shadow-md">
+            <i class="fa-solid fa-robot text-xs"></i>
+          </div>
+          <div class="max-w-[88%] bg-slate-900/80 border border-slate-800 rounded-2xl rounded-tl-sm p-4 text-slate-200 text-sm">
+            <p class="text-xs text-slate-400">Ledger cleared. Ask any new doubt!</p>
+          </div>
+        </div>
+      `;
+      chatLedger = [];
+      showToast("Doubt Ledger cleared!", "fa-solid fa-check");
+    }
+
+    function startAudioVisualizer(start) {
+      const visContainer = document.getElementById('audio-vis-container');
+      if (start) {
+        visContainer.classList.remove('opacity-40');
+        visContainer.classList.add('opacity-100');
+        if (audioVisInterval) clearInterval(audioVisInterval);
+        audioVisInterval = setInterval(() => {
+          visBars.forEach(b => {
+            b.style.height = `${Math.floor(Math.random() * 28) + 6}px`;
+          });
+        }, 100);
+      } else {
+        visContainer.classList.remove('opacity-100');
+        visContainer.classList.add('opacity-40');
+        if (audioVisInterval) clearInterval(audioVisInterval);
+        visBars.forEach((b, i) => b.style.height = `${(i % 3 + 2) * 5}px`);
+      }
+    }
+
+    /* =======================================================================
+       7. BOOKS & NOTES PDF GENERATOR (jsPDF Direct Download)
+       ======================================================================= */
+    async function generateCustomBookPDF() {
+      const topic = document.getElementById('book-topic-input').value.trim();
+      if (!topic) {
+        showToast("Please enter a book name or topic to compile!", "fa-solid fa-circle-exclamation");
+        return;
+      }
+
+      const statusBanner = document.getElementById('pdf-status-banner');
+      const statusText = document.getElementById('pdf-status-text');
+      const genBtn = document.getElementById('generate-pdf-btn');
+
+      statusBanner.classList.remove('hidden');
+      statusText.innerText = `Compiling complete study guide for "${topic}" via Gemini AI...`;
+      genBtn.disabled = true;
+      genBtn.classList.add('opacity-50');
+
+      try {
+        const apiKey = window.__CANVAS_API_KEY__ || "";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+        const prompt = `Create a high-yield, structured academic handbook / revision book for "${topic}".
+Write comprehensive notes with:
+1. Executive Summary & Core Definitions.
+2. 4 Detailed Core Chapters with key principles, formulas, and diagrams described in text.
+3. Code snippets or mathematical derivation formulas where applicable.
+4. Top 5 Frequently Asked Exam Questions with Solutions.
+5. Formula & Revision Cheat Sheet.
+
+Keep the content rich, high value, and ready for study guide publishing.`;
+
+        const res = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+
+        const data = await res.json();
+        const content = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Study notes compiled successfully.";
+
+        // Generate PDF using jsPDF
+        buildAndDownloadPDF(topic, content);
+
+        statusText.innerText = `PDF "${topic}" compiled & downloaded successfully!`;
+        showToast("PDF downloaded to your device!", "fa-solid fa-file-pdf");
+      } catch (err) {
+        console.error("PDF generation error:", err);
+        // Fallback offline generation so the user ALWAYS gets a PDF!
+        buildAndDownloadPDF(topic, `TOPIC: ${topic}\n\nEduSphere AI Study Notes & Handbook\nAuthor: Prince Kumar\n\n1. Overview & Fundamentals:\n${topic} is an essential academic subject. Key concepts must be revised systematically.\n\n2. Key Formulas & Highlights:\n- Master fundamental definitions\n- Focus on core theorems and step-by-step logic\n- Practice past 5 years question papers.\n\nGenerated for student revision via EduSphere AI.`);
+        showToast("Standard PDF created & downloaded!", "fa-solid fa-file-pdf");
+      } finally {
+        setTimeout(() => statusBanner.classList.add('hidden'), 5000);
+        genBtn.disabled = false;
+        genBtn.classList.remove('opacity-50');
+      }
+    }
+
+    function buildAndDownloadPDF(title, textContent) {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const margin = 16;
+      const maxLineWidth = pageWidth - (margin * 2);
+
+      // Title Banner Header
+      doc.setFillColor(7, 11, 25); // #070b19
+      doc.rect(0, 0, pageWidth, 28, 'F');
+
+      doc.setTextColor(0, 242, 254); // Cyan
+      doc.setFontSize(16);
+      doc.setFont("helvetica", "bold");
+      doc.text("EduSphere AI / Vidya Portal", margin, 12);
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      doc.text(`Official Academic Handbook • By Prince Kumar`, margin, 18);
+      doc.text(`Date: ${new Date().toLocaleDateString()}`, pageWidth - margin - 30, 18);
+
+      // Document Title
+      doc.setTextColor(24, 24, 27);
+      doc.setFontSize(15);
+      doc.setFont("helvetica", "bold");
+      doc.text(title.toUpperCase(), margin, 38);
+
+      // Divider line
+      doc.setDrawColor(0, 242, 254);
+      doc.setLineWidth(0.6);
+      doc.line(margin, 42, pageWidth - margin, 42);
+
+      // Body Text
+      doc.setTextColor(51, 65, 85);
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+
+      // Clean markdown asterisks
+      const cleaned = textContent.replace(/[*#_`]/g, '');
+      const splitText = doc.splitTextToSize(cleaned, maxLineWidth);
+
+      let cursorY = 48;
+      const lineHeight = 6.2;
+
+      for (let i = 0; i < splitText.length; i++) {
+        if (cursorY > pageHeight - 20) {
+          doc.addPage();
+          // Header on new page
+          doc.setFillColor(15, 23, 42);
+          doc.rect(0, 0, pageWidth, 12, 'F');
+          doc.setTextColor(255, 255, 255);
+          doc.setFontSize(8);
+          doc.text(`EduSphere AI Handbook: ${title} • Prince Kumar`, margin, 8);
+
+          doc.setTextColor(51, 65, 85);
+          doc.setFontSize(10);
+          cursorY = 20;
+        }
+        doc.text(splitText[i], margin, cursorY);
+        cursorY += lineHeight;
+      }
+
+      // Save PDF with sanitized filename
+      const safeFilename = title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+      doc.save(`EduSphere_${safeFilename}_Handbook.pdf`);
+    }
+
+    function downloadCuratedBook(type) {
+      if (type === 'c_dsa') {
+        const text = `C PROGRAMMING & DATA STRUCTURES COMPLETE HANDBOOK
+By Prince Kumar - EduSphere AI
+
+CHAPTER 1: C FOUNDATIONS
+- Variables, Data Types, Control Structures, Loops.
+- Functions, Scopes, Stack memory vs Heap memory.
+- Pointers: Pointer arithmetic, double pointers (**ptr), dynamic memory allocation using malloc, calloc, realloc, and free.
+
+CHAPTER 2: ESSENTIAL DATA STRUCTURES
+- Singly and Doubly Linked Lists: Insertion, Deletion, Reversal algorithm.
+- Stack: LIFO principle, Parenthesis matching, Infix to Postfix conversion.
+- Queue: FIFO principle, Circular queues, Priority queues.
+- Binary Search Tree (BST): Inorder, Preorder, Postorder traversals, height calculation, AVL balance factors.
+
+CHAPTER 3: ALGORITHM COMPLEXITIES
+- Bubble Sort: O(n^2), Insertion Sort: O(n^2), Merge Sort: O(n log n), Quick Sort: O(n log n).
+- Binary Search: O(log n), Linear Search: O(n).
+
+CHAPTER 4: TOP 5 EXAM CODING QUESTIONS
+1. Reverse a Linked List iteratively.
+2. Detect a cycle in a Linked List (Floyd's Tortoise and Hare).
+3. Implement a Stack using two Queues.
+4. Find the Lowest Common Ancestor (LCA) in a BST.
+5. Check if a Binary Tree is a valid BST.`;
+        buildAndDownloadPDF("C_Programming_and_DSA_Handbook", text);
+      } else if (type === 'physics_formulas') {
+        const text = `CLASS 11-12 PHYSICS FORMULA SHEET (JEE / NEET / BOARDS)
+By Prince Kumar - EduSphere AI
+
+1. MECHANICS & KINEMATICS
+- Equations of motion: v = u + at, s = ut + 0.5*a*t^2, v^2 = u^2 + 2as
+- Projectile Range: R = (u^2 * sin(2*theta)) / g
+- Friction: f_max = mu * N
+- Work-Energy Theorem: W_net = Delta_K
+
+2. ELECTROSTATICS & MAGNETISM
+- Coulomb's Law: F = (1 / (4*pi*epsilon_0)) * (q1*q2 / r^2)
+- Electric Field due to point charge: E = k*q / r^2
+- Gauss's Law: Flux = Q_enclosed / epsilon_0
+- Capacitance: C = epsilon_0 * A / d; Energy: U = 0.5 * C * V^2
+- Biot-Savart Law: dB = (mu_0 / (4*pi)) * (I * dl x r) / r^3
+- Lorentz Force: F = q(E + v x B)
+
+3. OPTICS & MODERN PHYSICS
+- Snell's Law: n1 * sin(theta1) = n2 * sin(theta2)
+- Lens Maker's Formula: 1/f = (mu - 1) * (1/R1 - 1/R2)
+- Photoelectric Equation: h*nu = Phi + K_max
+- De Broglie Wavelength: lambda = h / p`;
+        buildAndDownloadPDF("Physics_Ultimate_Formulas_Handbook", text);
+      } else {
+        const text = `FULL STACK WEB DEV BLUEPRINT
+By Prince Kumar - EduSphere AI
+
+1. HTML5 & MODERN CSS
+- Semantic elements: header, main, section, article, nav, aside, footer.
+- Flexbox: justify-content, align-items, flex-direction, flex-wrap.
+- CSS Grid: grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)).
+- Responsive Design: Mobile first approach with CSS media queries.
+
+2. JAVASCRIPT ES6+ ESSENTIALS
+- let/const, Arrow functions, Destructuring, Spread/Rest operators.
+- Promises, Async/Await, Fetch API, DOM manipulation.
+- Event loop: Call stack, Web APIs, Microtask queue, Macrotask queue.
+
+3. FRONTEND FRAMEWORKS & BACKEND
+- React Components, State, Props, useEffect, Custom hooks.
+- Node.js & Express REST APIs: GET, POST, PUT, DELETE.
+- Database: MongoDB collections, indexing, SQL foreign keys & joins.`;
+        buildAndDownloadPDF("Full_Stack_Web_Dev_Blueprint", text);
+      }
+      showToast("Curated Handbook PDF downloaded!", "fa-solid fa-file-pdf");
+    }
+
+    /* =======================================================================
+       8. ACADEMIC ROADMAPS ENGINE
+       ======================================================================= */
+    const roadmapData = {
+      btech_cse: [
+        { title: "Year 1: Foundations & Problem Solving", desc: "Master C / C++, basic Discrete Mathematics, Digital Logic, Engineering Physics & Git/GitHub." },
+        { title: "Year 2: Core Computer Science", desc: "Data Structures & Algorithms (Linked lists, Trees, Graphs), OOPs, Operating Systems (Process, Threads, Memory) & Computer Networks." },
+        { title: "Year 3: Specialization & Live Projects", desc: "Database Management Systems (SQL & NoSQL), Web Development or Machine Learning, build 2 major full-stack apps." },
+        { title: "Year 4: Placement Mastery & Internships", desc: "Solve 250+ LeetCode problems, System Design basics, Aptitude, Resume building & Campus Placements." }
+      ],
+      mern: [
+        { title: "Phase 1: HTML5, Modern CSS & Tailwind", desc: "Semantic markup, CSS Flexbox, Grid, Responsive Design & UI Component building." },
+        { title: "Phase 2: JavaScript Mastery (ES6+)", desc: "Async/Await, Closures, DOM, Fetch API, Array methods (map, filter, reduce)." },
+        { title: "Phase 3: React.js & State Management", desc: "Hooks (useState, useEffect, useMemo), Context API, React Router, Tailwind integration." },
+        { title: "Phase 4: Node.js, Express & MongoDB", desc: "RESTful APIs, JWT Authentication, Mongoose schemas, Deployment on Vercel/Render." }
+      ],
+      dsa_leetcode: [
+        { title: "Level 1: Arrays, Strings & Math", desc: "Two pointers, Sliding Window, Prefix Sum, Basic hashing & Frequency maps." },
+        { title: "Level 2: Linear Data Structures", desc: "Linked Lists (Slow/Fast pointers), Stacks (Monotonic stack), Queues & Deque." },
+        { title: "Level 3: Recursion, Trees & Graphs", desc: "Binary Tree traversals, BFS, DFS, Dijkstra algorithm, Topological Sort." },
+        { title: "Level 4: Dynamic Programming & Greedy", desc: "0/1 Knapsack, Longest Common Subsequence, DP on Grids, Top interview 150." }
+      ]
+    };
+
+    function loadRoadmap(type) {
+      const container = document.getElementById('roadmap-container');
+      const milestones = roadmapData[type] || roadmapData.btech_cse;
+
+      container.innerHTML = milestones.map((m, idx) => `
+        <div class="relative pl-6">
+          <div class="absolute -left-[33px] top-0 w-8 h-8 rounded-full bg-slate-900 border-2 border-cyan-400 flex items-center justify-center text-cyan-300 font-bold text-xs shadow-lg shadow-cyan-500/20">
+            ${idx + 1}
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">${m.title}</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">${m.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    async function generateAIRoadmap() {
+      const goal = document.getElementById('custom-roadmap-goal').value.trim();
+      if (!goal) {
+        showToast("Please enter your career or exam goal!", "fa-solid fa-circle-exclamation");
+        return;
+      }
+
+      const container = document.getElementById('roadmap-container');
+      container.innerHTML = `<div class="text-cyan-400 text-xs py-4"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Generating personalized milestone roadmap for "${goal}"...</div>`;
+
+      try {
+        const apiKey = window.__CANVAS_API_KEY__ || "";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+        const prompt = `Generate a realistic 4-step milestone academic roadmap for the goal: "${goal}".
+Return strictly a valid JSON array of objects with keys: "title" and "desc". Example:
+[{"title": "Step 1: ...", "desc": "..."}]`;
+
+        const res = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        const data = await res.json();
+        let rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
+        rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+
+        const parsed = JSON.parse(rawText);
+        roadmapData['custom'] = parsed;
+        loadRoadmap('custom');
+        showToast("Custom Roadmap generated!", "fa-solid fa-compass");
+      } catch (err) {
+        console.warn("Roadmap error, falling back:", err);
+        roadmapData['custom'] = [
+          { title: "Stage 1: Core Fundamentals", desc: `Understand the syllabus, prerequisites and core textbooks for ${goal}.` },
+          { title: "Stage 2: Practice & Practical Projects", desc: "Build hands-on problems and solve previous year question papers." },
+          { title: "Stage 3: Mock Tests & Revision", desc: "Timed examinations, doubt clearing via EduSphere AI, and weak spot analysis." },
+          { title: "Stage 4: Final Mastery", desc: "Comprehensive full syllabus mock tests and interview preparation." }
+        ];
+        loadRoadmap('custom');
+      }
+    }
+
+    /* =======================================================================
+       9. AI QUIZ ENGINE
+       ======================================================================= */
+    function setQuizTopicAndStart(t) {
+      document.getElementById('quiz-topic-input').value = t;
+      startAIQuiz();
+    }
+
+    async function startAIQuiz() {
+      const topic = document.getElementById('quiz-topic-input').value.trim() || 'C Programming';
+      const quizArea = document.getElementById('quiz-area');
+      const startBtn = document.getElementById('quiz-start-btn');
+
+      quizArea.innerHTML = `
+        <div class="py-12 flex flex-col items-center">
+          <i class="fa-solid fa-circle-notch fa-spin text-3xl text-amber-400 mb-3"></i>
+          <p class="text-sm text-slate-200 font-semibold">Generating 3 instant exam questions on "${topic}"...</p>
+        </div>
+      `;
+      startBtn.disabled = true;
+
+      try {
+        const apiKey = window.__CANVAS_API_KEY__ || "";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+        const prompt = `Generate 3 multiple choice questions (MCQs) for students on the topic "${topic}".
+Return ONLY a valid JSON array of 3 objects with keys:
+"question": string,
+"options": array of 4 strings,
+"correct": number (0 to 3 index of the correct answer),
+"explanation": short string explaining why it is correct.
+No markdown wrappers.`;
+
+        const res = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        const data = await res.json();
+        let jsonStr = data?.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
+        jsonStr = jsonStr.replace(/```json/g, '').replace(/```/g, '').trim();
+
+        currentQuizQuestions = JSON.parse(jsonStr);
+        currentQuestionIndex = 0;
+        quizScore = 0;
+        renderQuizQuestion();
+      } catch (e) {
+        console.warn("Quiz fallback triggered:", e);
+        // Fallback questions so student can always practice immediately
+        currentQuizQuestions = [
+          {
+            question: `In C language, what does the 'sizeof' operator return?`,
+            options: ["Size in bytes", "Size in bits", "Number of characters", "Memory address"],
+            correct: 0,
+            explanation: "The sizeof operator yields the size of its operand in units of bytes."
+          },
+          {
+            question: `Which data structure follows the LIFO (Last In, First Out) principle?`,
+            options: ["Queue", "Stack", "Array", "Linked List"],
+            correct: 1,
+            explanation: "Stack elements are inserted and popped from the same top end (LIFO)."
+          },
+          {
+            question: `What is the worst-case time complexity of Quick Sort?`,
+            options: ["O(n log n)", "O(n)", "O(n^2)", "O(1)"],
+            correct: 2,
+            explanation: "When pivot selection is unbalanced, QuickSort can degrade to O(n^2)."
+          }
+        ];
+        currentQuestionIndex = 0;
+        quizScore = 0;
+        renderQuizQuestion();
+      } finally {
+        startBtn.disabled = false;
+      }
+    }
+
+    function renderQuizQuestion() {
+      const quizArea = document.getElementById('quiz-area');
+      const q = currentQuizQuestions[currentQuestionIndex];
+
+      quizArea.innerHTML = `
+        <div class="w-full max-w-xl text-left">
+          <div class="flex items-center justify-between text-xs text-slate-400 mb-3 border-b border-slate-800 pb-2">
+            <span class="font-bold text-amber-400 uppercase tracking-wider">Question ${currentQuestionIndex + 1} of ${currentQuizQuestions.length}</span>
+            <span class="font-mono">Current Score: ${quizScore}</span>
+          </div>
+
+          <h3 class="text-base md:text-lg font-bold text-white mb-4 leading-snug">${q.question}</h3>
+
+          <div class="space-y-2.5 mb-6">
+            ${q.options.map((opt, i) => `
+              <button 
+                onclick="submitQuizAnswer(${i})" 
+                class="w-full text-left p-3.5 rounded-xl bg-slate-900 hover:bg-slate-800/90 border border-slate-800 hover:border-amber-400/50 text-slate-200 text-xs md:text-sm transition flex items-center gap-3"
+              >
+                <span class="w-6 h-6 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-xs text-amber-400">${String.fromCharCode(65 + i)}</span>
+                <span>${opt}</span>
+              </button>
+            `).join('')}
+          </div>
+
+          <div id="quiz-feedback" class="hidden p-3.5 rounded-xl text-xs"></div>
+        </div>
+      `;
+    }
+
+    function submitQuizAnswer(chosenIdx) {
+      const q = currentQuizQuestions[currentQuestionIndex];
+      const feedback = document.getElementById('quiz-feedback');
+      const isCorrect = chosenIdx === q.correct;
+
+      if (isCorrect) {
+        quizScore++;
+        feedback.className = "p-3.5 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-200 text-xs flex flex-col gap-1";
+        feedback.innerHTML = `
+          <div class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Sahi Jawab! (Correct)</div>
+          <div>${q.explanation}</div>
+        `;
+      } else {
+        feedback.className = "p-3.5 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-200 text-xs flex flex-col gap-1";
+        feedback.innerHTML = `
+          <div class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-circle-xmark"></i> Galat! Sahi answer tha: Option ${String.fromCharCode(65 + q.correct)} (${q.options[q.correct]})</div>
+          <div>${q.explanation}</div>
+        `;
+      }
+
+      feedback.classList.remove('hidden');
+
+      setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < currentQuizQuestions.length) {
+          renderQuizQuestion();
+        } else {
+          showQuizSummary();
+        }
+      }, 2400);
+    }
+
+    function showQuizSummary() {
+      const quizArea = document.getElementById('quiz-area');
+      const total = currentQuizQuestions.length;
+      const pct = Math.round((quizScore / total) * 100);
+
+      quizArea.innerHTML = `
+        <div class="w-full max-w-md text-center py-6">
+          <div class="w-20 h-20 rounded-full mx-auto bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center text-white text-3xl shadow-xl shadow-amber-500/30 mb-4">
+            <i class="fa-solid fa-award"></i>
+          </div>
+          <h3 class="text-xl font-black text-white mb-1">Quiz Completed!</h3>
+          <p class="text-xs text-slate-400 mb-4">Aapka score evaluate ho chuka hai.</p>
+
+          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 mb-6 flex justify-around items-center">
+            <div>
+              <div class="text-2xl font-black text-amber-400">${quizScore}/${total}</div>
+              <div class="text-[11px] text-slate-500">Correct Answers</div>
+            </div>
+            <div class="h-8 w-[1px] bg-slate-800"></div>
+            <div>
+              <div class="text-2xl font-black text-cyan-400">${pct}%</div>
+              <div class="text-[11px] text-slate-500">Accuracy</div>
+            </div>
+          </div>
+
+          <button onclick="startAIQuiz()" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-lg transition">
+            <i class="fa-solid fa-rotate-right mr-1.5"></i> Play Another Quiz
+          </button>
+        </div>
+      `;
+    }
+
+    /* =======================================================================
+       10. UTILITIES: TOAST, SOUND MUTE, LANGUAGE SWITCH
+       ======================================================================= */
+    function onLanguageChange() {
+      currentLang = document.getElementById('lang-select').value;
+      if (recognition) {
+        recognition.lang = currentLang;
+      }
+      showToast(`Language set to ${document.getElementById('lang-select').options[document.getElementById('lang-select').selectedIndex].text}`, "fa-solid fa-language");
+    }
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      if (isMuted) {
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        ttsIcon.className = "fa-solid fa-volume-xmark text-rose-400 text-sm";
+        showToast("Voice narration muted (Text only)", "fa-solid fa-volume-xmark");
+      } else {
+        ttsIcon.className = "fa-solid fa-volume-high text-sm";
+        showToast("Voice narration enabled!", "fa-solid fa-volume-high");
+      }
+    }
+
+    function showToast(message, iconClass = "fa-solid fa-circle-info") {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      const toastIcon = document.getElementById('toast-icon');
+
+      toastMsg.innerText = message;
+      toastIcon.className = iconClass;
+
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3400);
+    }
+
+    /* =======================================================================
+       11. CYBER CONSTELLATION & FLOATING FORMULA CANVAS
+       ======================================================================= */
+    function initBackgroundConstellations() {
+      const canvas = document.getElementById('bg-canvas');
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
+
+      const symbols = ['∫', '∑', 'λ', 'π', 'E=mc²', 'f(x)', 'O(n)', '<code/>', '√x', '∆v', 'd/dx'];
+      const particles = [];
+      const count = Math.min(Math.floor((w * h) / 18000), 45);
+
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.45,
+          vy: (Math.random() - 0.5) * 0.45,
+          size: Math.random() * 2 + 1,
+          symbol: Math.random() > 0.65 ? symbols[Math.floor(Math.random() * symbols.length)] : null,
+          color: Math.random() > 0.5 ? 'rgba(0, 242, 254, ' : 'rgba(168, 85, 247, '
+        });
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, w, h);
+
+        // Draw connections
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+
+          if (p.symbol) {
+            ctx.fillStyle = p.color + '0.35)';
+            ctx.font = '10px Fira Code';
+            ctx.fillText(p.symbol, p.x, p.y);
+          } else {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = p.color + '0.5)';
+            ctx.fill();
+          }
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+            if (dist < 110) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(0, 242, 254, ${0.12 * (1 - dist / 110)})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(render);
+      }
+      render();
+    }
+  </script>
 </body>
 </html>
